@@ -1,14 +1,13 @@
-# ESX_CommunityService
+# esx_kamuhizmeti
 
-An alternative form of punishment and social correction to jail. With this script, you can now send criminals in the central square, to provide community service by cleaning and gardening. Try to escape it and you will get your service extended!
+Oyunculara ceza oalrak çöp toplama tarzı kamu hizmeti cezaları vermeyi sağlar
 
 
-### Requirements
+### Gerekenler
 * ESX
 * ESX skinchanger
   * [skinchanger](https://github.com/ESX-Org/skinchanger)
 
-## Download & Installation
 
 ### Using Git
 ```
@@ -21,13 +20,10 @@ git clone https://github.com/apoiat/esx_communityservice [esx]/esx_communityserv
 - Put it in the `[esx]` directory
 
 
-## Installation
-- Import `esx_communityservice.sql` in your database
-- Add this in your server.cfg :
+## kurulum
+- Veritabanınıza `esx_kamuhizmeti.sql` dosyasını aktarın
+- Sunucunuzun server.cfg dosyasına `esx_kamuhizmeti` yazın
 
-```
-start esx_communityservice
-```
 ## How to apply community service.
 
 - Use the `esx_communityservice:sendToCommunityService(target, service_count)` server trigger.
@@ -36,29 +32,29 @@ start esx_communityservice
 
 
 
-# How to add to policejob menu.
+# policejob menüsüne ekleme yolu
 
-Example in `esx_policejob: client/main.lua`:
+ `esx_policejob: client/main.lua`:
 
 ```lua
--- ADDITION [1]
+-- aşağıdaki satırları ctrl+f ile bulup {label = "Community Service",	value = 'communityservice'} satırını ekleyin
 {label = _U('fine'),			value = 'fine'},
 {label = _U('unpaid_bills'),	value = 'unpaid_bills'},
--- add code below (don't forget to add ',' before new row)
+-- son satırdan önce "," koymayı unutmayın
 {label = "Community Service",	value = 'communityservice'}
 
 
--- ADDITION [2]
+-- aşağıdaki kodu bulun
 elseif action == 'unpaid_bills' then
 	OpenUnpaidBillsMenu(closestPlayer)
--- add code below
+-- aşağıdaki kodu ekleyin
 elseif action == 'communityservice' then
 	SendToCommunityService(GetPlayerServerId(closestPlayer))
 end
 
 
 -- ADDITION [3]
--- add this function
+-- dosyanın en sonuna bu function'ı ekelyin
 function SendToCommunityService(player)
 	ESX.UI.Menu.Open('dialog', GetCurrentResourceName(), 'Community Service Menu', {
 		title = "Community Service Menu",
@@ -75,17 +71,3 @@ function SendToCommunityService(player)
 		menu.close()
 	end)
 end
-```
-
-
-# Legal
-### License
-ESX_CommunityService - A community service script for fivem servers.
-
-Copyright (C) 2018-2019 Apostolos Iatridis
-
-This program Is free software: you can redistribute it And/Or modify it under the terms Of the GNU General Public License As published by the Free Software Foundation, either version 3 Of the License, Or (at your option) any later version.
-
-This program Is distributed In the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty Of MERCHANTABILITY Or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License For more details.
-
-You should have received a copy Of the GNU General Public License along with this program. If Not, see http://www.gnu.org/licenses/.
